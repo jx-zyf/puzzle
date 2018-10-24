@@ -1,0 +1,61 @@
+.time {
+    font-size: 20px;
+    margin: 20px auto;
+    width: 400px;
+    padding: 15px 0;
+    background-color: #eee;
+    border-radius: 5px;
+}
+
+.time>span {
+    font-size: 26px;
+    color: red;
+    margin: 0 10px;
+}
+
+.puzzle_box {
+    margin: 0 auto;
+    list-style-type: none;
+	padding: 0;
+	width: 400px;
+	border-left: 1px solid #10ad32;
+	border-top: 1px solid #10ad32;
+	overflow: hidden;
+	box-shadow: 1px 1px 2px;
+}
+
+.puzzle_item {
+    width: 100px;
+	height: 100px;
+	line-height: 100px;
+	font-size: 20px;
+	background-color: lightblue;
+	display: inline-block;
+	text-align: center;
+	border-right: 1px solid #10ad32;
+	border-bottom: 1px solid #10ad32;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+.empty {
+    background-color: transparent;
+    opacity: 0;
+}
+
+.start_btn, .reset_btn {
+	width: 180px;
+    margin: 30px 20px;
+    padding: 15px 0;
+	background-color: lightblue;
+    border: 1px solid #10ad32;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bolder;
+    outline: none;
+}
+
+.start_btn:hover, .reset_btn:hover {
+	background-color: rgb(149, 204, 223);
+}
