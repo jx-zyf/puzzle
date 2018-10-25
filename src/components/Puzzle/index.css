@@ -1,7 +1,17 @@
+.select_box {
+    outline: none;
+    border: 1px solid #eee;
+    cursor: pointer;
+    width: 80px;
+    display: inline-block;
+    padding: 5px;
+}
+
 .time {
     font-size: 20px;
     margin: 20px auto;
-    width: 400px;
+    width: 96vw;
+    max-width: 400px;
     padding: 15px 0;
     background-color: #eee;
     border-radius: 5px;
@@ -16,26 +26,24 @@
 .puzzle_box {
     margin: 0 auto;
     list-style-type: none;
-	padding: 0;
-	width: 400px;
-	border-left: 1px solid #10ad32;
-	border-top: 1px solid #10ad32;
-	overflow: hidden;
-	box-shadow: 1px 1px 2px;
+    padding: 0;
+    width: 96vw;
+    max-width: 400px;
+    border-left: 1px solid #10ad32;
+    border-top: 1px solid #10ad32;
+    overflow: hidden;
+    box-shadow: 1px 1px 2px;
 }
 
 .puzzle_item {
-    width: 100px;
-	height: 100px;
-	line-height: 100px;
-	font-size: 20px;
-	background-color: lightblue;
-	display: inline-block;
-	text-align: center;
-	border-right: 1px solid #10ad32;
-	border-bottom: 1px solid #10ad32;
-	box-sizing: border-box;
-	cursor: pointer;
+    font-size: 20px;
+    background-color: lightblue;
+    display: inline-block;
+    text-align: center;
+    border-right: 1px solid #10ad32;
+    border-bottom: 1px solid #10ad32;
+    box-sizing: border-box;
+    cursor: pointer;
 }
 
 .empty {
@@ -43,11 +51,13 @@
     opacity: 0;
 }
 
-.start_btn, .reset_btn {
-	width: 180px;
+.start_btn,
+.reset_btn {
+    width: 36vw;
+    max-width: 180px;
     margin: 30px 20px;
     padding: 15px 0;
-	background-color: lightblue;
+    background-color: lightblue;
     border: 1px solid #10ad32;
     border-radius: 5px;
     font-size: 16px;
@@ -56,6 +66,7 @@
     outline: none;
 }
 
-.start_btn:hover, .reset_btn:hover {
-	background-color: rgb(149, 204, 223);
+.start_btn:hover,
+.reset_btn:hover {
+    background-color: rgb(149, 204, 223);
 }

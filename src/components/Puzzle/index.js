@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import toastr from 'toastr';
 import './index.css';
 
@@ -20,10 +21,18 @@ toastr.options = {
     "hideMethod": "fadeOut"
 }
 
+let puzzle_box_width;
+
+const numConfig = {
+    '3': 9,
+    '4': 16
+};
+
 class Puzzle extends Component {
     constructor() {
         super();
         this.state = {
+            degree: '3',
             puzzles: [],
             time: 0,
             isStart: undefined,
@@ -32,12 +41,25 @@ class Puzzle extends Component {
     }
 
     componentDidMount() {
+        const puzzle_box = ReactDOM.findDOMNode(this.refs.puzzle_box);
+        if (puzzle_box) {
+            puzzle_box_width = puzzle_box.offsetWidth;
+        }
         this.init();
+    }
+
+    degreeChange = (e) => {
+        this.setState({ degree: e.target.value });
+        setTimeout(() => {
+            this.init();
+        }, 0);
     }
 
     init = () => {
         let arr = [];
-        for (let i = 1; i < 16; i++ ) {
+        const { degree } = this.state;
+        const num = numConfig[degree]
+        for (let i = 1; i < num; i++ ) {
             arr.push(i);
         }
         arr = arr.sort(() => {
@@ -69,14 +91,15 @@ class Puzzle extends Component {
     }
 
     isSuccess = () => {
-        const { puzzles } = this.state;
-        const result = puzzles.slice(0, 15).every((item, index) => item === index + 1);
+        const { puzzles, degree } = this.state;
+        const num = numConfig[degree]
+        const result = puzzles.slice(0, num - 1).every((item, index) => item === index + 1);
         return result;
     }
 
     itemClick = (curIndex) => {
         const { isStart } = this.state;
-        const NUM = 4;
+        const NUM = ~~this.state.degree;
         const newPuzzles = this.state.puzzles;
         const emptyIndex = newPuzzles.findIndex(item => item === -1);
         let topIndex = curIndex - NUM,
@@ -104,29 +127,43 @@ class Puzzle extends Component {
         })
         setTimeout(() => {
             if (this.isSuccess()) {
-                toastr.success(`恭喜你！成功了！总共耗时 ${this.state.time} 秒`);
+                toastr["success"](`恭喜你！成功了！总共耗时 ${this.state.time} 秒！游戏即将重置！`);
                 clearInterval(this.timer);
+                setTimeout(() => {
+                    this.init();
+                }, 3000);
             }
         }, 100)
     }
 
     render() {
-        const { puzzles, time, isStart } = this.state;
+        const { puzzles, time, isStart, degree } = this.state;
         const txtConfig = {
             undefined: '开始',
             false: '继续',
             true: '暂停',
         }
+        const widthConfig = {
+            '3': '33.33%',
+            '4': '25.00%',
+        }
+        const itemStyle = { width: widthConfig[degree], lineHeight: `${puzzle_box_width * (widthConfig[degree].slice(0, 5)/100)}px` };
         return (
             <div>
+                <p>难度选择：
+                <select onChange={this.degreeChange} className='select_box'>
+                    <option value="3" checked>简单</option>
+                    <option value="4">一般</option>
+                </select>
+                </p>
                 <p className='time'>时间:<span>{time}</span>秒</p>
-                <ul className='puzzle_box'>
+                <ul className='puzzle_box' ref='puzzle_box'>
                     {puzzles.map((item, index) => (
                         <li 
                             className={item === -1 ? 'puzzle_item empty' : 'puzzle_item'} 
                             key={item} 
                             onClick={() => this.itemClick(index)}
-                            style={isStart !== true ? {cursor: 'not-allowed' } : {}}
+                            style={isStart !== true ? { cursor: 'not-allowed', ...itemStyle } : { ...itemStyle }}
                         >{item}</li>
                     ))}
                 </ul>
