@@ -25,7 +25,8 @@ let puzzle_box_width;
 
 const numConfig = {
     '3': 9,
-    '4': 16
+    '4': 16,
+    '5': 25,
 };
 
 class Puzzle extends Component {
@@ -146,14 +147,19 @@ class Puzzle extends Component {
         const widthConfig = {
             '3': '33.33%',
             '4': '25.00%',
+            '5': '20.00%',
         }
-        const itemStyle = { width: widthConfig[degree], lineHeight: `${puzzle_box_width * (widthConfig[degree].slice(0, 5)/100)}px` };
+        const itemStyle = { 
+            width: widthConfig[degree], 
+            lineHeight: `${puzzle_box_width * (widthConfig[degree].slice(0, 5)/100)}px` 
+        };
         return (
             <div>
                 <p>难度选择：
                 <select onChange={this.degreeChange} className='select_box'>
                     <option value="3" checked>简单</option>
                     <option value="4">一般</option>
+                    <option value="5">困难</option>
                 </select>
                 </p>
                 <p className='time'>时间:<span>{time}</span>秒</p>
