@@ -1,1 +1,1 @@
-[preview](http://blog.linxunzyf.cn/puzzle/build/index.html)
+[preview](http://linxunzyf.cn/puzzle/build/index.html)
